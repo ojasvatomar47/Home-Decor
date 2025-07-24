@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 
@@ -33,28 +31,14 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
-          {/*
-            *** CRITICAL CHANGES HERE ***
-            1. Add 'action="/thank-you"' to redirect after submission.
-            2. Add 'data-netlify-honeypot="bot-field"' for spam protection.
-            3. Add a hidden honeypot input field.
-            4. Correct 'name="subject"' to 'name="_subject"' if you want Netlify to use it as the email subject.
-          */}
           <form
-            name="contact-form"
+            name="contact"
             method="POST"
             data-netlify="true"
-            action="/thank-you" // Redirect to this page after successful submission
-            data-netlify-honeypot="bot-field" // Netlify's spam protection
             className="space-y-6"
           >
             {/* Hidden field required by Netlify for forms rendered by JS */}
-            <input type="hidden" name="form-name" value="contact-form" />
-
-            {/* Honeypot field - Keep this hidden from users */}
-            <p hidden>
-              <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
-            </p>
+            <input type="hidden" name="form-name" value="contact" />
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
@@ -69,25 +53,13 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <label htmlFor="contact_info" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID or Phone Number</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID</label>
               <input
                 type="text"
-                id="contact_info"
-                name="contact_info"
+                id="email"
+                name="email"
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
-                placeholder="e.g., you@example.com or +91 9876543210"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="_subject" // Changed from 'subject' to '_subject' for Netlify email subject
-                className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
-                placeholder="Regarding products, services, etc."
+                placeholder="e.g., you@example.com"
                 required
               />
             </div>
