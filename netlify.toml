@@ -1,0 +1,20 @@
+# netlify.toml
+
+# This section is for Netlify Forms setup
+# It explicitly tells Netlify to process POST requests to /contact as form submissions
+[[redirects]]
+  from = "/contact"
+  to = "/contact" # Or to a success page like "/success" if you create one
+  status = 200
+  force = false
+  form = "contact-form" # MUST match the form's name attribute
+
+# Optional: Ensure build settings are explicit if not already
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Optional: If you want to explicitly ignore the HTML forms processing for speed
+# but rely solely on the redirect, though the above 'form' key usually handles it.
+# [build.processing]
+#   html = { forms = false } # This might be useful if other forms are being detected.
