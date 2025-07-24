@@ -1,0 +1,19 @@
+<!-- public/__forms.html -->
+<!-- This file is for Netlify's build system to detect the form. -->
+<!-- It will not be visible to users. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netlify Forms Detection</title>
+  </head>
+  <body>
+    <!-- Define your form here with the exact 'name' attributes as your React form -->
+    <!-- Netlify will scan this hidden form during deployment -->
+    <form name="contact-form" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="contact_info" />
+      <input type="text" name="_subject" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

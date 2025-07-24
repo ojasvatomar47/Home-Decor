@@ -4,13 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-// Removed 'type { Metadata } from 'next';' as it's no longer exported here.
-// Removed: import { getPlaceholderImage } from '../../lib/utils'; // Adjust path if needed
-// Removed: export const metadata block
-
 export default function ContactPage() {
-  // No custom handleSubmit function or useState for form data needed for basic Netlify Forms.
-  // Netlify automatically intercepts submissions when data-netlify="true" is present.
 
   return (
     <div className="bg-gray-50">
@@ -30,7 +24,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90 drop-shadow-md">
             We&apos;d love to hear from you! Reach out to our team in Lucknow for any inquiries about products, services, or consultations.
-          </p> {/* FIXED: 'We'd' changed to 'We&apos;d' */}
+          </p>
         </div>
       </section>
 
@@ -41,9 +35,8 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
-          {/* Netlify Forms integration: Add data-netlify="true" and a name attribute */}
+          {/* Netlify Forms integration: Removed 'action' attribute. Netlify intercepts POST to current page. */}
           <form name="contact-form" method="POST" data-netlify="true" className="space-y-6">
-            {/* IMPORTANT: Add a hidden input for form-name for Netlify to detect it correctly */}
             <input type="hidden" name="form-name" value="contact-form" />
 
             <div>
@@ -51,22 +44,21 @@ export default function ContactPage() {
               <input
                 type="text"
                 id="name"
-                name="name" // 'name' attribute is crucial for form submission
+                name="name"
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Full Name"
-                required // Name is mandatory
+                required
               />
             </div>
-            {/* Single field for Email ID / Phone Number */}
             <div>
               <label htmlFor="contact_info" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID or Phone Number</label>
               <input
-                type="text" // Generic text type for email or phone
+                type="text"
                 id="contact_info"
-                name="contact_info" // Generic name to capture either email or phone
+                name="contact_info"
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="e.g., you@example.com or +91 9876543210"
-                required // This single field is now mandatory
+                required
               />
             </div>
             <div>
@@ -74,21 +66,21 @@ export default function ContactPage() {
               <input
                 type="text"
                 id="subject"
-                name="_subject" // Netlify recognizes _subject for email subject
+                name="_subject"
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Regarding products, services, etc."
-                required // Subject is mandatory
+                required
               />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
               <textarea
                 id="message"
-                name="message" // 'name' attribute is crucial
+                name="message"
                 rows={5}
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Tell us more about your needs..."
-                required // Message is mandatory
+                required
               ></textarea>
             </div>
             <button
