@@ -17,11 +17,17 @@ export default function ContactPage() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    // Convert FormData to URL-encoded string for Netlify Forms
-    const encoded = new URLSearchParams(formData as any).toString();
+    // FIXED: Convert FormData to an array of [key, string] pairs for URLSearchParams
+    // This explicitly handles FormDataEntryValue which can be a File.
+    const formEntries: [string, string][] = [];
+    for (const [key, value] of formData.entries()) {
+        formEntries.push([key, value.toString()]); // Convert value to string
+    }
+    const encoded = new URLSearchParams(formEntries).toString();
 
     try {
-      const response = await fetch('/', { // Submit to the current page URL
+      // Submit to the current page URL. Netlify intercepts this POST request.
+      const response = await fetch('/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded', // CRITICAL: Set correct Content-Type
@@ -31,7 +37,6 @@ export default function ContactPage() {
 
       if (response.ok) {
         setSubmissionStatus('success');
-        // Optionally clear form fields here if you were managing state for them
         form.reset(); // Resets the form fields
       } else {
         setSubmissionStatus('error');
@@ -73,7 +78,6 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
-          {/* Netlify Forms integration: Add onSubmit handler */}
           <form name="contact-form" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-6">
             <input type="hidden" name="form-name" value="contact-form" />
 
@@ -123,20 +127,23 @@ export default function ContactPage() {
             </div>
 
             {/* Submission Status Messages */}
+            {validationMessage && (
+              <p className="text-red-600 text-sm mt-2">{validationMessage}</p>
+            )}
             {submissionStatus === 'submitting' && (
               <p className="text-gray-600 text-sm mt-2">Sending your message...</p>
             )}
             {submissionStatus === 'success' && (
               <p className="text-green-600 text-sm mt-2">Thank you! Your message has been sent successfully.</p>
             )}
-            {submissionStatus === 'error' && (
-              <p className="text-red-600 text-sm mt-2">Failed to send message. Please try again later.</p>
+            {submissionStatus === 'error' && !validationMessage && (
+              <p className="text-red-600 text-sm mt-2">There was an error sending your message. Please try again later.</p>
             )}
 
             <button
               type="submit"
               className="w-full bg-teal-600 text-white py-3 px-4 rounded-md text-lg font-semibold hover:bg-teal-700 transition duration-300 shadow-md transform hover:scale-105"
-              disabled={submissionStatus === 'submitting'} // Disable during submission
+              disabled={submissionStatus === 'submitting'}
             >
               {submissionStatus === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
