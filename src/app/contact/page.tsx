@@ -3,13 +3,10 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+
 // Removed 'type { Metadata } from 'next';' as it's no longer exported here.
-
 // Removed: import { getPlaceholderImage } from '../../lib/utils'; // Adjust path if needed
-
 // Removed: export const metadata block
-// Metadata is now handled by the parent layout.tsx (Server Component)
 
 export default function ContactPage() {
   // No custom handleSubmit function or useState for form data needed for basic Netlify Forms.
@@ -32,8 +29,8 @@ export default function ContactPage() {
             Get in Touch with Home Decor
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90 drop-shadow-md">
-            We'd love to hear from you! Reach out to our team in Lucknow for any inquiries about products, services, or consultations.
-          </p>
+            We&apos;d love to hear from you! Reach out to our team in Lucknow for any inquiries about products, services, or consultations.
+          </p> {/* FIXED: 'We'd' changed to 'We&apos;d' */}
         </div>
       </section>
 
@@ -45,7 +42,6 @@ export default function ContactPage() {
             Send Us a Message
           </h2>
           {/* Netlify Forms integration: Add data-netlify="true" and a name attribute */}
-          {/* Removed onSubmit handler as Netlify handles submission directly */}
           <form name="contact-form" method="POST" data-netlify="true" className="space-y-6">
             {/* IMPORTANT: Add a hidden input for form-name for Netlify to detect it correctly */}
             <input type="hidden" name="form-name" value="contact-form" />
@@ -122,10 +118,10 @@ export default function ContactPage() {
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.135a11.042 11.042 0 005.516 5.516l1.135-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                 <a href="tel:+919335199341" className="hover:underline">+91 93351 99341</a>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-lg">
+              {/* <div className="flex items-center justify-center lg:justify-start text-lg">
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 9a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v10z"></path></svg>
                 <a href="mailto:info@yourdomain.com" className="hover:underline">info@yourdomain.com</a>
-              </div>
+              </div> */}
               <div className="flex items-center justify-center lg:justify-start text-lg">
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <p>Mon-Sun: 9:00 AM - 10:00 PM</p>
@@ -136,11 +132,11 @@ export default function ContactPage() {
           {/* Google Map Embed */}
           <div className="mt-8 w-full rounded-lg overflow-hidden shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.118029013063!2d80.95378991499999!3d26.905429200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39995700217a1dcf%3A0x31fa6573c35b4507!2sHome%20Decor%20Furnishing%20Store!5e0!3m2!1sen!2sin!4v1678912345678!5m2!1sen!2sin" // Replace with your actual embed URL
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.118029013063!2d80.95378991499999!3d26.905429200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39995700217a1dcf%3A0x31fa6573c35b4507!2sHome%20Decor%20Furnishing%20Store!5e0!3m2!1sen!2sin!4v1678912345678!5m2!1sen!2sin"
               width="100%"
               height="300"
-              style={{ border: 0 }}
-              allowFullScreen={false} // Set to false to prevent full screen for better UX on page
+              style={{ objectFit: 'cover' }}
+              allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Home Decor Furnishing Store Location on Google Maps"

@@ -4,10 +4,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image'; // Import Image component
 import Link from 'next/link';   // Import Link component
-// Removed 'type { Metadata } from 'next';' as it's no longer exported here.
 
+// Removed 'type { Metadata } from 'next';' as it's no longer exported here.
 // Removed: export const metadata block
-// Metadata is now handled by the parent layout.tsx (Server Component)
 
 // --- AccordionItem Component (Reusable) ---
 interface AccordionItemProps {
@@ -105,7 +104,7 @@ export default function FAQsPage() {
 
   return (
     <div className="bg-gray-50">
-      {/* FAQs Hero/Intro Section - UPDATED COLOR */}
+      {/* FAQs Hero/Intro Section */}
       <section className="relative bg-gradient-to-br from-neutral-700 to-neutral-900 text-white py-16 md:py-24 text-center overflow-hidden rounded-b-xl shadow-lg">
         <Image
           src="/images/kitchen.jpg" // Unique image for this hero
@@ -139,14 +138,13 @@ export default function FAQsPage() {
           ))}
         </div>
 
-        {/* Call to Action - UPDATED COLOR */}
         <div className="text-center mt-12 p-6 bg-gray-100 rounded-xl shadow-md">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
             Still Have Questions?
           </h2>
           <p className="text-lg text-gray-700 mb-6">
-            If you couldn't find the answer you were looking for, don't hesitate to reach out to our friendly team.
-          </p>
+            If you couldn&apos;t find the answer you were looking for, don&apos;t hesitate to reach out to our friendly team.
+          </p> {/* FIXED: 'couldn't' and 'don't' */}
           <Link href="/contact" className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-105">
             Contact Us Directly
           </Link>

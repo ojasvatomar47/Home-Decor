@@ -4,15 +4,20 @@
 import React, { useState } from 'react'; // Import useState
 import Image from 'next/image'; // For optimized images
 import Link from 'next/link';   // For client-side navigation
-// Removed: import { getPlaceholderImage } from '../lib/utils'; // Adjust path if needed
+
 import ProductModal from '../components/ProductModal'; // Import the new ProductModal component
 
-// Removed: export const metadata block
-// Metadata is now handled by the parent layout.tsx (Server Component)
+// Define the Product interface (should be consistent across files that use it)
+interface Product {
+  name: string;
+  href: string;
+  image: string;
+  description: string;
+}
 
 export default function DashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<any>(null); // State to hold product data for modal
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null); // Fixed: Unexpected any
 
   const featuredProducts = [
     // UPDATED: image paths to your actual files in public/images/
@@ -29,7 +34,7 @@ export default function DashboardPage() {
     { title: 'Comprehensive Solutions', icon: '🛋️', description: 'From products to services, we offer everything to perfect your home.' },
   ];
 
-  const openProductModal = (product: any) => {
+  const openProductModal = (product: Product) => { // Fixed: Unexpected any
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
@@ -43,9 +48,8 @@ export default function DashboardPage() {
     <div className="bg-gray-50">
       {/* Hero Section */}
       <section className="relative min-h-[50vh] md:min-h-[80vh] flex items-center justify-center text-center overflow-hidden pt-20 md:pt-0">
-        {/* Background Image with Overlay - UPDATED SRC */}
         <Image
-          src="/images/curtains.jpg" // <-- Use your actual hero image path here
+          src="/images/curtains.jpg"
           alt="Elegant interior design showcase by Home Decor Lucknow"
           fill
           style={{ objectFit: 'cover' }}
@@ -58,8 +62,8 @@ export default function DashboardPage() {
             Elevate Your Home with Exquisite Decor in Lucknow
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl mb-8 opacity-90 drop-shadow-md animate-fade-in-up">
-            Home Decor: Lucknow's trusted destination for premium furnishings and tailored interior design services.
-          </p>
+            Home Decor: Lucknow&apos;s trusted destination for premium furnishings and tailored interior design services.
+          </p> {/* Fixed: ' */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up delay-200">
             <Link href="/products" className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-xl hover:bg-teal-700 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl">
               Explore Home Decor Products
@@ -99,7 +103,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* Featured Products Showcase - UPDATED IMAGE SRCS */}
+      {/* Featured Products Showcase */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 text-center mb-12">
           Discover Our Handpicked Home Decor Products
@@ -109,7 +113,7 @@ export default function DashboardPage() {
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
               <div className="relative w-full h-56">
                 <Image
-                  src={product.image} // Now directly using the image path from featuredProducts array
+                  src={product.image}
                   alt={`Home Decor Product: ${product.name}`}
                   fill
                   style={{ objectFit: 'cover' }}
@@ -117,7 +121,7 @@ export default function DashboardPage() {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-1">{product.name}</h3>
                 <p className="text-gray-600 text-sm mb-4 line-clamp-1">{product.description}</p>
                 <button
                   onClick={() => openProductModal(product)}
@@ -157,7 +161,7 @@ export default function DashboardPage() {
           Visit Our Showroom in Lucknow
         </h2>
         <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-6">
-          Experience the quality and artistry of our home decor products and discuss your design needs with our experts. We're conveniently located at:
+          Experience the quality and artistry of our home decor products and discuss your design needs with our experts. We&apos;re conveniently located at:
         </p>
         <address className="not-italic text-xl font-semibold text-gray-800 mb-6">
           439, Kursi Hwy, Sector H,<br/>
@@ -173,7 +177,7 @@ export default function DashboardPage() {
             width="100%"
             height="300"
             className="md:h-80"
-            style={{ border: 0 }}
+            style={{ objectFit: 'cover' }}
             allowFullScreen={false}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -200,13 +204,13 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           <div className="bg-white p-8 rounded-xl shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
             <p className="italic text-gray-700 mb-4">
-              "Home Decor in Lucknow truly transformed my apartment near Gomti Nagar! Their bedsheets are incredibly luxurious, and the advice for my living room setup was invaluable."
+              &quot;Home Decor in Lucknow truly transformed my apartment near Gomti Nagar! Their bedsheets are incredibly luxurious, and the advice for my living room setup was invaluable.&quot;
             </p>
             <p className="font-semibold text-gray-800">- Priya Sharma, Lucknow</p>
           </div>
           <div className="bg-white p-8 rounded-xl shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
             <p className="italic text-gray-700 mb-4">
-              "The modular kitchen designed by Home Decor is a dream come true for our Jankipuram home. Functional, stylish, and perfect for our family. Highly recommended for interior design in Lucknow!"
+              &quot;The modular kitchen designed by Home Decor is a dream come true for our Jankipuram home. Functional, stylish, and perfect for our family. Highly recommended for interior design in Lucknow!&quot;
             </p>
             <p className="font-semibold text-gray-800">- Rahul Singh, Lucknow</p>
           </div>
