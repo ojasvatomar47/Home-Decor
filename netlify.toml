@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/contact"
-  to = "/contact.html"
-  status = 200
-  force = true

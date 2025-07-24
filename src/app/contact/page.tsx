@@ -1,11 +1,11 @@
-'use client';
+'use client'; // This directive is crucial for client-side rendering
 
 import React from 'react';
 import Image from 'next/image';
 
 export default function ContactPage() {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 font-sans"> {/* Added font-sans for Inter font */}
       {/* Contact Hero/Intro Section */}
       <section className="relative bg-gradient-to-br from-indigo-700 to-purple-600 text-white py-16 md:py-24 text-center overflow-hidden rounded-b-xl shadow-lg">
         <Image
@@ -33,25 +33,21 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
+          {/* Formspree integration: action points to your Formspree endpoint */}
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            action="/thank-you"
-            data-netlify-honeypot="bot-field"
+            action="https://formspree.io/f/xdkdgnav" // Your Formspree endpoint
+            method="POST" // Must be POST for Formspree
             className="space-y-6"
           >
-            <input type="hidden" name="form-name" value="contact" />
-            <p className="hidden">
-              <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
-            </p>
+            {/* Formspree handles spam protection, so no need for data-netlify-honeypot or hidden bot-field */}
+            {/* Formspree also doesn't require a hidden 'form-name' input like Netlify */}
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
               <input
                 type="text"
                 id="name"
-                name="name"
+                name="name" // Name attribute for Formspree to capture data
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Full Name"
                 required
@@ -59,13 +55,25 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID</label>
+              <label htmlFor="contact_info" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID or Phone Number</label>
               <input
                 type="text"
-                id="email"
-                name="email"
+                id="contact_info"
+                name="contact_info" // Name attribute for Formspree to capture data
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
-                placeholder="e.g., you@example.com"
+                placeholder="e.g., you@example.com or +91 9876543210"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="_subject" // Formspree uses '_subject' for the email subject line
+                className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
+                placeholder="Regarding products, services, etc."
                 required
               />
             </div>
@@ -74,7 +82,7 @@ export default function ContactPage() {
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
               <textarea
                 id="message"
-                name="message"
+                name="message" // Name attribute for Formspree to capture data
                 rows={5}
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Tell us more about your needs..."
@@ -119,11 +127,11 @@ export default function ContactPage() {
           {/* Google Map Embed */}
           <div className="mt-8 w-full rounded-lg overflow-hidden shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.118029013063!2d80.95378991499999!3d26.905429200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39995700217a1dcf%3A0x31fa6573c35b4507!2sHome%20Decor%20Furnishing%20Store!5e0!3m2!1sen!2sin!4v1678912345678!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.10705593856!2d80.9329738!3d26.9015091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957df072714c7%3A0xc368a186407b1d40!2sHome%20Decor%20(Interior%20Designer)!5e0!3m2!1sen!2sin!4v1678912345678!5m2!1sen!2sin"
               width="100%"
               height="300"
-              style={{ objectFit: 'cover' }}
-              allowFullScreen={false}
+              style={{ border: 0 }} // inline style for no border
+              allowFullScreen={true} // Boolean attribute should be true/false
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Home Decor Furnishing Store Location on Google Maps"
