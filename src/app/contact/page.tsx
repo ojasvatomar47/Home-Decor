@@ -27,7 +27,7 @@ export default function ContactPage() {
 
     try {
       // Submit to the current page URL. Netlify intercepts this POST request.
-      const response = await fetch('/', {
+      const response = await fetch('/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded', // CRITICAL: Set correct Content-Type
