@@ -1,60 +1,15 @@
-// src/app/contact/page.tsx
-'use client'; // Still needed for Image and Link components from 'next'
+'use client';
 
-import React, { useState } from 'react'; // Import useState
+import React from 'react';
 import Image from 'next/image';
 
 export default function ContactPage() {
-  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-  const [validationMessage, setValidationMessage] = useState('');
-
-  // Handle form submission with custom fetch
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default browser form submission
-    setSubmissionStatus('submitting');
-    setValidationMessage(''); // Clear previous messages
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    // FIXED: Convert FormData to an array of [key, string] pairs for URLSearchParams
-    // This explicitly handles FormDataEntryValue which can be a File.
-    const formEntries: [string, string][] = [];
-    for (const [key, value] of formData.entries()) {
-        formEntries.push([key, value.toString()]); // Convert value to string
-    }
-    const encoded = new URLSearchParams(formEntries).toString();
-
-    try {
-      // Submit to the current page URL. Netlify intercepts this POST request.
-      const response = await fetch('/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded', // CRITICAL: Set correct Content-Type
-        },
-        body: encoded,
-      });
-
-      if (response.ok) {
-        setSubmissionStatus('success');
-        form.reset(); // Resets the form fields
-      } else {
-        setSubmissionStatus('error');
-        setValidationMessage('Failed to send message. Please try again later.');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setSubmissionStatus('error');
-      setValidationMessage('An error occurred. Please check your internet connection and try again.');
-    }
-  };
-
   return (
     <div className="bg-gray-50">
       {/* Contact Hero/Intro Section */}
       <section className="relative bg-gradient-to-br from-indigo-700 to-purple-600 text-white py-16 md:py-24 text-center overflow-hidden rounded-b-xl shadow-lg">
         <Image
-          src="/images/cust-curtains.jpg" // Assuming you have a contact-specific hero image
+          src="/images/cust-curtains.jpg"
           alt="Contact Home Decor Lucknow"
           fill
           style={{ objectFit: 'cover' }}
@@ -78,8 +33,28 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
-          <form name="contact-form" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-6">
+          {/*
+            *** CRITICAL CHANGES HERE ***
+            1. Add 'action="/thank-you"' to redirect after submission.
+            2. Add 'data-netlify-honeypot="bot-field"' for spam protection.
+            3. Add a hidden honeypot input field.
+            4. Correct 'name="subject"' to 'name="_subject"' if you want Netlify to use it as the email subject.
+          */}
+          <form
+            name="contact-form"
+            method="POST"
+            data-netlify="true"
+            action="/thank-you" // Redirect to this page after successful submission
+            data-netlify-honeypot="bot-field" // Netlify's spam protection
+            className="space-y-6"
+          >
+            {/* Hidden field required by Netlify for forms rendered by JS */}
             <input type="hidden" name="form-name" value="contact-form" />
+
+            {/* Honeypot field - Keep this hidden from users */}
+            <p hidden>
+              <label>Don&apos;t fill this out if you&apos;re human: <input name="bot-field" /></label>
+            </p>
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
@@ -92,6 +67,7 @@ export default function ContactPage() {
                 required
               />
             </div>
+
             <div>
               <label htmlFor="contact_info" className="block text-sm font-medium text-gray-700 mb-1">Your Email ID or Phone Number</label>
               <input
@@ -103,17 +79,19 @@ export default function ContactPage() {
                 required
               />
             </div>
+
             <div>
               <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
               <input
                 type="text"
                 id="subject"
-                name="_subject"
+                name="_subject" // Changed from 'subject' to '_subject' for Netlify email subject
                 className="mt-1 block text-gray-600 w-full border border-gray-300 rounded-md shadow-sm py-2.5 px-4 focus:ring-teal-500 focus:border-teal-500 transition duration-200"
                 placeholder="Regarding products, services, etc."
                 required
               />
             </div>
+
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
               <textarea
@@ -126,26 +104,11 @@ export default function ContactPage() {
               ></textarea>
             </div>
 
-            {/* Submission Status Messages */}
-            {validationMessage && (
-              <p className="text-red-600 text-sm mt-2">{validationMessage}</p>
-            )}
-            {submissionStatus === 'submitting' && (
-              <p className="text-gray-600 text-sm mt-2">Sending your message...</p>
-            )}
-            {submissionStatus === 'success' && (
-              <p className="text-green-600 text-sm mt-2">Thank you! Your message has been sent successfully.</p>
-            )}
-            {submissionStatus === 'error' && !validationMessage && (
-              <p className="text-red-600 text-sm mt-2">There was an error sending your message. Please try again later.</p>
-            )}
-
             <button
               type="submit"
               className="w-full bg-teal-600 text-white py-3 px-4 rounded-md text-lg font-semibold hover:bg-teal-700 transition duration-300 shadow-md transform hover:scale-105"
-              disabled={submissionStatus === 'submitting'}
             >
-              {submissionStatus === 'submitting' ? 'Sending...' : 'Send Message'}
+              Send Message
             </button>
           </form>
         </div>
@@ -168,10 +131,6 @@ export default function ContactPage() {
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.135a11.042 11.042 0 005.516 5.516l1.135-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                 <a href="tel:+919335199341" className="hover:underline">+91 93351 99341</a>
               </div>
-              {/* <div className="flex items-center justify-center lg:justify-start text-lg">
-                <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 9a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v10z"></path></svg>
-                <a href="mailto:info@yourdomain.com" className="hover:underline">info@yourdomain.com</a>
-              </div> */}
               <div className="flex items-center justify-center lg:justify-start text-lg">
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <p>Mon-Sun: 9:00 AM - 10:00 PM</p>

@@ -1,20 +1,21 @@
 # netlify.toml
 
-# This section is for Netlify Forms setup
-# It explicitly tells Netlify to process POST requests to /contact as form submissions
-[[redirects]]
-  from = "/contact"
-  to = "/contact" # Or to a success page like "/success" if you create one
-  status = 200
-  force = false
-  form = "contact-form" # MUST match the form's name attribute
-
-# Optional: Ensure build settings are explicit if not already
+# Define build settings for your Next.js project
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = ".next" # This is where Next.js outputs your built site
+
+# No specific redirect for the form submission is needed here.
+# Netlify will process POST requests to the form defined by name="contact-form"
+# and redirect to the 'action' URL defined in your React form.
+
+# Optional: If you want to explicitly redirect /thank-you to a specific file
+# [[redirects]]
+#   from = "/thank-you"
+#   to = "/thank-you.html" # Or whatever path Next.js generates for your thank-you page
+#   status = 200
 
 # Optional: If you want to explicitly ignore the HTML forms processing for speed
-# but rely solely on the redirect, though the above 'form' key usually handles it.
+# (though usually not necessary unless you have many forms or unusual behavior)
 # [build.processing]
-#   html = { forms = false } # This might be useful if other forms are being detected.
+#   html = { forms = false }
