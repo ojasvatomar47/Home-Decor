@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -35,10 +37,13 @@ export default function ContactPage() {
             name="contact"
             method="POST"
             data-netlify="true"
+            data-netlify-honeypot="bot-field"
             className="space-y-6"
           >
-            {/* Hidden field required by Netlify for forms rendered by JS */}
             <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>Don&apos;t fill this out if you're human: <input name="bot-field" /></label>
+            </p>
 
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
@@ -95,7 +100,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-center lg:justify-start text-lg">
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0L6.343 16.657a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 <address className="not-italic">
-                  439, Kursi Hwy, Sector H,<br/>
+                  439, Kursi Hwy, Sector H,<br />
                   Jankipuram, Lucknow, Uttar Pradesh 226021
                 </address>
               </div>
