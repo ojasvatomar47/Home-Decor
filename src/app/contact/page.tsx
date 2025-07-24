@@ -1,10 +1,48 @@
 // src/app/contact/page.tsx
 'use client'; // Still needed for Image and Link components from 'next'
 
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import Image from 'next/image';
 
 export default function ContactPage() {
+  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [validationMessage, setValidationMessage] = useState('');
+
+  // Handle form submission with custom fetch
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent default browser form submission
+    setSubmissionStatus('submitting');
+    setValidationMessage(''); // Clear previous messages
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    // Convert FormData to URL-encoded string for Netlify Forms
+    const encoded = new URLSearchParams(formData as any).toString();
+
+    try {
+      const response = await fetch('/', { // Submit to the current page URL
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // CRITICAL: Set correct Content-Type
+        },
+        body: encoded,
+      });
+
+      if (response.ok) {
+        setSubmissionStatus('success');
+        // Optionally clear form fields here if you were managing state for them
+        form.reset(); // Resets the form fields
+      } else {
+        setSubmissionStatus('error');
+        setValidationMessage('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmissionStatus('error');
+      setValidationMessage('An error occurred. Please check your internet connection and try again.');
+    }
+  };
 
   return (
     <div className="bg-gray-50">
@@ -35,8 +73,8 @@ export default function ContactPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center lg:text-left">
             Send Us a Message
           </h2>
-          {/* Netlify Forms integration: Removed 'action' attribute. Netlify intercepts POST to current page. */}
-          <form name="contact-form" method="POST" data-netlify="true" className="space-y-6">
+          {/* Netlify Forms integration: Add onSubmit handler */}
+          <form name="contact-form" method="POST" data-netlify="true" onSubmit={handleSubmit} className="space-y-6">
             <input type="hidden" name="form-name" value="contact-form" />
 
             <div>
@@ -83,11 +121,24 @@ export default function ContactPage() {
                 required
               ></textarea>
             </div>
+
+            {/* Submission Status Messages */}
+            {submissionStatus === 'submitting' && (
+              <p className="text-gray-600 text-sm mt-2">Sending your message...</p>
+            )}
+            {submissionStatus === 'success' && (
+              <p className="text-green-600 text-sm mt-2">Thank you! Your message has been sent successfully.</p>
+            )}
+            {submissionStatus === 'error' && (
+              <p className="text-red-600 text-sm mt-2">Failed to send message. Please try again later.</p>
+            )}
+
             <button
               type="submit"
               className="w-full bg-teal-600 text-white py-3 px-4 rounded-md text-lg font-semibold hover:bg-teal-700 transition duration-300 shadow-md transform hover:scale-105"
+              disabled={submissionStatus === 'submitting'} // Disable during submission
             >
-              Send Message
+              {submissionStatus === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         </div>
