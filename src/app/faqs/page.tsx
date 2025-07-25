@@ -39,9 +39,8 @@ function AccordionItem({ question, answer, isOpen, onClick }: AccordionItemProps
         id={`faq-answer-${question.replace(/\s+/g, '-')}`}
         role="region"
         aria-labelledby={`faq-question-${question.replace(/\s+/g, '-')}`}
-        className={`overflow-hidden transition-all duration-500 ease-in-out ${
-          isOpen ? 'max-h-screen opacity-100 py-4 px-6' : 'max-h-0 opacity-0'
-        }`}
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-screen opacity-100 py-4 px-6' : 'max-h-0 opacity-0'
+          }`}
       >
         <p className="text-gray-700 leading-relaxed">{answer}</p>
       </div>
@@ -77,8 +76,8 @@ export default function FAQsPage() {
           You can visit our showroom at:
           <br /><br />
           <strong>Home Decor</strong><br />
-          439, Kursi Hwy, Sector H,<br />
-          Jankipuram, Lucknow, Uttar Pradesh 226021
+          Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
+          Kursi road Lucknow, Uttar Pradesh 226021
           <br /><br />
           We look forward to welcoming you and helping you explore our collection!
         </>

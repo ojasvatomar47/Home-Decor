@@ -43,16 +43,17 @@ export default function Footer() {
                 +91 98765 43210
               </a>
             </li>
-            {/* <li>
-              <a href="mailto:info@yourdomain.com" className="hover:text-teal-400 transition duration-300 flex items-center justify-center md:justify-start">
+            <li>
+              <a href="mailto:homedecortedhipuliya@gmail.com" className="hover:text-teal-400 transition duration-300 flex items-center justify-center md:justify-start">
                 <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-1 9a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v10z"></path></svg>
-                info@yourdomain.com
+                homedecortedhipuliya@gmail.com
               </a>
-            </li> */}
+            </li>
             <li>
               <address className="not-italic text-sm leading-relaxed flex items-start justify-center md:justify-start">
                 <svg className="w-5 h-5 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0L6.343 16.657a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                439, Kursi Hwy, Sector H, Jankipuram, Lucknow, Uttar Pradesh 226021
+                Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
+                Kursi road Lucknow, Uttar Pradesh 226021
               </address>
             </li>
           </ul>

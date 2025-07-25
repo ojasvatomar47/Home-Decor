@@ -164,12 +164,11 @@ export default function DashboardPage() {
           Experience the quality and artistry of our home decor products and discuss your design needs with our experts. We&apos;re conveniently located at:
         </p>
         <address className="not-italic text-xl font-semibold text-gray-800 mb-6">
-          439, Kursi Hwy, Sector H,<br/>
-          Jankipuram, Lucknow, Uttar Pradesh 226021
+          Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
+          Kursi road Lucknow, Uttar Pradesh 226021
         </address>
         <p className="text-base text-gray-600 mb-8">
-          <strong>Business Hours:</strong> Monday - Saturday, 10:00 AM - 7:00 PM <br/>
-          (Closed on Sundays)
+          <strong>Business Hours:</strong> Monday - Sunday, 9:00 AM - 10:00 PM <br />
         </p>
         {/* <div className="w-full rounded-lg overflow-hidden shadow-md mb-8">
           <iframe
@@ -186,7 +185,7 @@ export default function DashboardPage() {
         </div> */}
         <div className="mt-8">
           <Link
-            href="https://www.google.com/maps/search/?api=1&query=Home+Decor+Furnishing+Store,+439,+Kursi+Hwy,+Sector+H,+Jankipuram,+Lucknow,+Uttar+Pradesh+226021"
+            href="https://www.google.com/maps/place/26%C2%B054'19.9%22N+80%C2%B057'21.1%22E/@26.905513,80.9532887,17z/data=!3m1!4b1!4m4!3m3!8m2!3d26.905513!4d80.9558636?entry=ttu"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md hover:bg-orange-600 transition duration-300 ease-in-out transform hover:scale-105"
