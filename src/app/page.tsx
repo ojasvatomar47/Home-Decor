@@ -168,7 +168,8 @@ export default function DashboardPage() {
           Kursi road Lucknow, Uttar Pradesh 226021
         </address>
         <p className="text-base text-gray-600 mb-8">
-          <strong>Business Hours:</strong> Monday - Sunday, 9:00 AM - 10:00 PM <br />
+          <strong>Business Hours:</strong> Thursday - Tuesday, 11:00 AM - 9:00 PM <br />
+          (Closed on Wednesday)
         </p>
         {/* <div className="w-full rounded-lg overflow-hidden shadow-md mb-8">
           <iframe

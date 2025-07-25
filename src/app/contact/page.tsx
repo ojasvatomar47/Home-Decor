@@ -119,12 +119,31 @@ export default function ContactPage() {
                 <a href="mailto:homedecortedhipuliya@gmail.com" className="hover:underline">homedecortedhipuliya@gmail.com</a> {/* Example email, replace with actual */}
               </div>
               <div className="flex items-center justify-center lg:justify-start text-lg">
-                <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.135a11.042 11.042 0 005.516 5.516l1.135-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                <a href="tel:+919335199341" className="hover:underline">+91 93351 99341</a>
+                <svg
+                  className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.135a11.042 11.042 0 005.516 5.516l1.135-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  ></path>
+                </svg>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
+                  <a href="tel:+919335199341" className="hover:underline">
+                    +91 93351 99341
+                  </a>
+                  <a href="tel:+919793239707" className="hover:underline">
+                    +91 97932 39707
+                  </a>
+                </div>
               </div>
               <div className="flex items-center justify-center lg:justify-start text-lg">
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <p>Mon-Sun: 9:00 AM - 10:00 PM</p>
+                <p>Thurs-Tue: 11:00 AM - 9:00 PM</p>
               </div>
             </div>
           </div>
