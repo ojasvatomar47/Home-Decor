@@ -110,7 +110,7 @@ export default function ContactPage() {
                 <svg className="w-6 h-6 text-teal-600 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0L6.343 16.657a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 <address className="not-italic">
                   Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
-                  Kursi road Lucknow, Uttar Pradesh 226021
+                  Kursi Road, Lucknow, Uttar Pradesh 226021
                 </address>
               </div>
               {/* New Email Address Entry */}

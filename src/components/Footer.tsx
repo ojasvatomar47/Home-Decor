@@ -103,7 +103,7 @@ export default function Footer() {
                 </svg>
                 Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br />
                 Sabji Mandi Red Light<br />
-                Kursi road Lucknow, Uttar Pradesh 226021
+                Kursi Road, Lucknow, Uttar Pradesh 226021
               </address>
             </li>
           </ul>

@@ -77,7 +77,7 @@ export default function FAQsPage() {
           <br /><br />
           <strong>Home Decor</strong><br />
           Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
-          Kursi road Lucknow, Uttar Pradesh 226021
+          Kursi Road, Lucknow, Uttar Pradesh 226021
           <br /><br />
           We look forward to welcoming you and helping you explore our collection!
         </>

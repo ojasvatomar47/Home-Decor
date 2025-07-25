@@ -81,7 +81,7 @@ export default function DashboardPage() {
           Your Premier Home Decor Destination in Lucknow
         </h2>
         <p className="text-lg md:text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-          At <strong>Home Decor, Lucknow</strong>, we are dedicated to transforming your living and working spaces into beautiful, functional, and personalized environments. Located conveniently on Kursi Highway, Jankipuram, we bring years of expertise in interior design and a meticulously curated selection of high-quality furnishings. From contemporary flair to traditional elegance, our team works closely with you to understand your vision and deliver exceptional results that elevate your everyday living.
+          At <strong>Home Decor, Lucknow</strong>, we are dedicated to transforming your living and working spaces into beautiful, functional, and personalized environments. Conveniently located at Shop No. 1-2, Prabhu Plaza, near Tedhi Puliya Sabji Mandi Red Light, Kursi Road, Lucknow - 226021, we bring years of expertise in interior design and a meticulously curated selection of high-quality furnishings. From contemporary flair to traditional elegance, our team works closely with you to understand your vision and deliver exceptional results that elevate your everyday living.
         </p>
       </section>
 
@@ -165,7 +165,7 @@ export default function DashboardPage() {
         </p>
         <address className="not-italic text-xl font-semibold text-gray-800 mb-6">
           Shop no 1-2 Prabhu Plaza, Tedhi Puliya,<br /> Sabji Mandi Red Light
-          Kursi road Lucknow, Uttar Pradesh 226021
+          Kursi road, Lucknow, Uttar Pradesh 226021
         </address>
         <p className="text-base text-gray-600 mb-8">
           <strong>Business Hours:</strong> Thursday - Tuesday, 11:00 AM - 9:00 PM <br />
