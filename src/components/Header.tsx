@@ -48,7 +48,7 @@ export default function Header() {
         <ul className="hidden md:flex flex-wrap justify-center gap-x-8 gap-y-4 text-lg font-medium">
           <li>
             <Link href="/" className="text-gray-700 hover:text-teal-600 transition duration-300 px-3 py-2 rounded-md">
-              Dashboard
+              Home
             </Link>
           </li>
           <li>
@@ -97,7 +97,7 @@ export default function Header() {
               <ul className="flex flex-col space-y-4 text-xl font-medium">
                 <li>
                   <Link href="/" onClick={closeMobileMenu} className="block text-gray-700 hover:text-teal-600 transition duration-300 py-2">
-                    Dashboard
+                    Home
                   </Link>
                 </li>
                 <li>

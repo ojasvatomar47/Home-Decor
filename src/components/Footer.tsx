@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="md:col-span-1">
           <h3 className="text-xl font-semibold text-white mb-6">Quick Links</h3>
           <ul className="space-y-3 text-sm">
-            <li><Link href="/" className="hover:text-teal-400 transition duration-300">Dashboard</Link></li>
+            <li><Link href="/" className="hover:text-teal-400 transition duration-300">Home</Link></li>
             <li><Link href="/products" className="hover:text-teal-400 transition duration-300">Products</Link></li>
             <li><Link href="/services" className="hover:text-teal-400 transition duration-300">Services</Link></li>
             <li><Link href="/faqs" className="hover:text-teal-400 transition duration-300">FAQs</Link></li>
