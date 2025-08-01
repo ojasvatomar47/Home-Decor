@@ -58,24 +58,29 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+  const primaryGaId = process.env.NEXT_PUBLIC_GA_PRIMARY_ID;
+  const secondaryGaId = process.env.NEXT_PUBLIC_GA_SECONDARY_ID;
 
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen`}>
-        {googleAnalyticsId && (
+        {/* This check ensures scripts only render if the primary ID exists */}
+        {primaryGaId && (
           <>
-            {/* Google Tag (gtag.js) */}
+            {/* The loader script now uses the NEW primary ID */}
             <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${primaryGaId}`}
               strategy="afterInteractive"
             />
+            {/* The inline script now contains BOTH config lines */}
             <Script id="google-analytics" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${googleAnalyticsId}');
+
+                gtag('config', '${primaryGaId}');
+                ${secondaryGaId ? `gtag('config', '${secondaryGaId}');` : ''}
               `}
             </Script>
           </>
