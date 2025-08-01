@@ -3,6 +3,7 @@ import '../app/globals.css';
 import React from 'react';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -24,11 +25,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Home Decor - Your Destination for Beautiful Interiors in Lucknow',
     description: 'Discover exquisite home decor products and professional interior design services in Lucknow, Uttar Pradesh. Transform your living spaces with our premium bedsheets, blinds, carpets, modular kitchens, and more.',
-    url: 'https://Decorlucknow.com',
+    url: 'https://decorlucknow.com',
     siteName: 'Home Decor Lucknow',
     images: [
       {
-        url: 'https://Decorlucknow.com/images/home-decor-og.jpg',
+        url: 'https://decorlucknow.com/images/home-decor-og.jpg',
         width: 1200,
         height: 630,
         alt: 'Home Decor Lucknow - Elegant Interiors',
@@ -41,13 +42,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Home Decor - Your Destination for Beautiful Interiors in Lucknow',
     description: 'Discover exquisite home decor products and professional interior design services in Lucknow, Uttar Pradesh.',
-    images: ['https://Decorlucknow.com/images/home-decor-twitter.jpg'],
+    images: ['https://decorlucknow.com/images/home-decor-twitter.jpg'],
   },
   robots: 'index, follow',
-  // FIXED: Removed the 'icons' object to avoid conflict with public/favicon.ico
-  // Next.js automatically serves public/favicon.ico at /favicon.ico
   alternates: {
-    canonical: 'https://Decorlucknow.com',
+    canonical: 'https://decorlucknow.com',
+  },
+  other: {
+    'google-site-verification': process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
   },
 };
 
@@ -56,9 +58,29 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen`}>
+        {googleAnalyticsId && (
+          <>
+            {/* Google Tag (gtag.js) */}
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${googleAnalyticsId}');
+              `}
+            </Script>
+          </>
+        )}
+
         <Header />
         <main className="flex-grow">
           {children}
